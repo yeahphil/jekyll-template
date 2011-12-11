@@ -3,6 +3,8 @@ title: "Phillip Kast"
 exclude:
 - public
 - config.ru
+- README.md
+- LICENSE
 
 markdown: rdiscount
 rdiscount:
