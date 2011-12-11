@@ -1,0 +1,9 @@
+title: "Phillip Kast"
+
+exclude:
+- public
+- config.ru
+
+markdown: rdiscount
+rdiscount:
+    extensions: [:footnotes]
