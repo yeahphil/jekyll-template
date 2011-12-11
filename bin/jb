@@ -1,0 +1,81 @@
+#!/usr/bin/env ruby
+require 'fileutils'
+require 'yaml'
+
+def usage
+  puts "Usage: jb <command> [args]"
+  exit(-1)
+end
+
+def basepath
+  File.expand_path(File.join(File.dirname(__FILE__), '..'))
+end
+
+def memo_p(name)
+  @memo ||= {}
+
+  if !@memo[name]
+    @memo[name] = File.join(basepath, name)
+    FileUtils.mkdir_p(@memo[name])
+  end
+  
+  @memo[name]
+end
+
+def drafts_path
+  memo_p('_drafts')
+end
+
+def posts_path
+  memo_p('_posts')
+end
+
+CONFIG = File.exist?(File.join(basepath, '_config.yml')) ? YAML.load(File.join(basepath, '_config.yml')) : {}
+
+cmd = ARGV[0]
+
+case cmd
+  when 'new'
+    title = ARGV[1..-1].join(' ')
+    filename = title.downcase.gsub(/\s+/, '-').gsub(/[^a-z0-9\-_]/,'') + ".md"
+    path = File.join(drafts_path, filename)
+
+    if File.exist?(path)
+      puts "You already have a draft by that name"
+      puts path
+      exit
+    else
+      File.open(path, 'w') do |f|
+        f << "---\nlayout: post\ntitle: \"#{title}\"\n---\n\n"
+      end
+      puts path
+    end
+
+  when 'drafts'
+    entries = Dir.entries(drafts_path).select {|entry| File.file?(File.join(drafts_path, entry)) && File.extname(entry) == '.md'}  
+    puts "No drafts." and exit if entries.count == 0
+    entries.each {|entry| puts File.basename(entry) }
+
+  when 'publish'
+    fn = ARGV[1]
+    fn += ".md" if File.extname(fn) != ".md"
+    path = File.join(drafts_path, fn)
+
+    puts "That draft does not exist" and exit unless File.exist?(path)
+
+    published_fn = "#{Time.now.strftime("%Y-%m-%d")}-#{fn}"
+    published_path = File.join(posts_path, published_fn)
+
+    puts `git reset && (git mv #{path} #{published_path} || mv #{path} #{published_path}) && git add #{published_path} && git ci -m "Publish #{fn}"`
+
+  when 'deploy'
+    puts "host not set in _config" and exit unless CONFIG['host']
+    
+    puts "Are you sure (will also push to origin)? y/n"
+    if gets[0..0].downcase == 'y'
+      `git push`
+      `ssh #{CONFIG['host']} "cd blog && git pull && jekyll"`
+    end
+  default
+    usage
+end
