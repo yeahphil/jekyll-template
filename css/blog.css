@@ -1,0 +1,31 @@
+/*body { background-color: #f7f7f7;}*/
+
+.title {
+	font-size: 80%;
+}
+
+.inset-row { padding-top: 60px; }
+.nav-col { padding-top: 60px;}
+
+ul.menu li {
+	display: block;
+	/*padding: 0 4px;*/
+}
+
+.headshot { 
+	border: 1px solid #ccc; 
+	width: 109px;
+	height: 109px;
+	text-align: center;
+	margin: auto;
+}
+
+.bio {
+	color: #999;
+}
+
+.date {
+	font-size: 14px;
+	font-weight: bold;
+	color: #bfbfbf;
+}

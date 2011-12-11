@@ -1,0 +1,33 @@
+<html>
+<head>
+	<title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}</title>
+	<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/css/blog.css">
+	<link rel="stylesheet" type="text/css" href="/css/prettify.css">
+
+	<script type="text/javascript" src="/js/prettify/prettify.js"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="row inset-row">
+			<div class="span10">
+				<!-- main body  -->
+				<div class="row">
+					<div class="span10 offset2">
+						<h1 class="small"><a href="/">{{ site.title }}</a> <small>has a blog</small></h1>
+					</div>
+				</div>
+
+				<div class="contents">
+					{{ content }}
+				</div>
+			</div>
+			<div class="span4 offset1 nav-col">
+				{% include bio.html %}
+			</div>
+		</div>
+		
+	</div>
+
+</body>
+</html>

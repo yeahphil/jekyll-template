@@ -1,0 +1,14 @@
+---
+layout: default
+---
+
+<div class="row">
+	<div class="span2 ">
+		<h4 class="date pull-right">{{ page.date | date: "%b %d %Y" }}</h4>
+	</div>
+	<div class="span8">
+		<h3><a href="{{ post.url }}">{{ page.title }}</a></h3>
+
+		{{ content }}
+	</div>
+</div>
