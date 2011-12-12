@@ -10,5 +10,27 @@ layout: default
 		<h3><a href="{{ post.url }}">{{ page.title }}</a></h3>
 
 		{{ content }}
+
+		<div class="post-footer">
+			<p>
+				If you enjoyed this post, you should <a href="http://twitter.com/yeahphil">follow me on Twitter</a>.
+			</p>
+
+			<p>
+				<br>
+				
+				{% if page.previous %}
+				<span class="pull-left">
+				<a href="{{ page.previous.url }}">&larr; Previous: {{ page.previous.title }}</a>
+				</span>
+				{% endif %}
+
+				{% if page.next %}
+				<span class="pull-right">
+				<a href="{{ page.next.url }}">Next: {{ page.next.title }} &rarr;</a>
+				</span>
+				{% endif %}
+			</p>
+		</div>
 	</div>
 </div>

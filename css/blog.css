@@ -1,7 +1,12 @@
 /*body { background-color: #f7f7f7;}*/
 
-.title {
-	font-size: 80%;
+.title a {
+	color: #004FA3;
+}
+
+.title a:hover {
+	color: #003670;
+	text-decoration: none;
 }
 
 .inset-row { padding-top: 60px; }
@@ -24,8 +29,17 @@ ul.menu li {
 	color: #999;
 }
 
+.bio a { color: #528dcc; }
+.bio a:hover { color: #4171a3; }
+
 .date {
 	font-size: 14px;
 	font-weight: bold;
 	color: #bfbfbf;
+}
+
+.post-footer {
+	/* to match bootstrap's hr element */
+	border-top: 1px solid #eee;
+	padding-top: 19px;	
 }
