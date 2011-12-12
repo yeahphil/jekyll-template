@@ -1,6 +1,9 @@
 <html>
 <head>
 	<title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}</title>
+
+	<link rel="alternate" type="application/atom+xml" href="http://{{ site.host }}/atom.xml">
+
 	<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="/css/blog.css">
 	<link rel="stylesheet" type="text/css" href="/css/prettify.css">
@@ -14,7 +17,7 @@
 				<!-- main body  -->
 				<div class="row">
 					<div class="span10 offset2">
-						<h1 class="small"><a href="/">{{ site.title }}</a> <small>has a blog</small></h1>
+						<h1 class="title small"><a href="/">{{ site.title }}</a> <small>has a blog</small></h1>
 					</div>
 				</div>
 
@@ -28,6 +31,5 @@
 		</div>
 		
 	</div>
-
 </body>
 </html>
